@@ -1,10 +1,9 @@
 package com.controleveiculos.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +21,18 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotBlank
+	
+    @Column(nullable = false)
 	private String name;
-	@NotBlank
+    
+    @Column(nullable = false, unique = true)
 	private String email;
-	@NotBlank
+    
+    @Column(nullable = false, unique = true)
 	private String cpf;
-	@NotBlank
-	private Date nascimento;
+    
+    @Column(nullable = false)
+	private String nascimento;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
@@ -38,7 +41,7 @@ public class User {
 	public User() {
 	}
 
-	public User(Long id, String name, String email, String cpf, Date nascimento) {
+	public User(Long id, String name, String email, String cpf, @NotBlank String nascimento) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,11 +50,11 @@ public class User {
 		this.nascimento = nascimento;
 	}
 
-	public Date getNascimento() {
+	public String getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(Date nascimento) {
+	public void setNascimento(String nascimento) {
 		this.nascimento = nascimento;
 	}
 

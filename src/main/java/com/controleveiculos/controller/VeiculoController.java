@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.controleveiculos.model.Veiculo;
+import com.controleveiculos.proxy.FipeProxy;
 import com.controleveiculos.repository.VeiculoRepository;
 
 @RestController
-@RequestMapping("/veiculos")
+@RequestMapping("/api/v1/veiculos")
 public class VeiculoController {
 
 	private List<Veiculo> veiculos = new ArrayList<>();
@@ -21,7 +22,10 @@ public class VeiculoController {
 	@Autowired
 	private VeiculoRepository veiculoRepository;
 	
-	@PostMapping("/cadastro")
+	@Autowired
+	private FipeProxy proxy;
+	
+	@PostMapping
 	public Veiculo veiculos(@RequestBody Veiculo veiculos) {
 		return this.veiculoRepository.save(veiculos);
 	} 

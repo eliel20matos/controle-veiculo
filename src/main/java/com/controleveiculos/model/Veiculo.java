@@ -1,5 +1,6 @@
 package com.controleveiculos.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table
@@ -16,13 +16,13 @@ public class Veiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@NotBlank
+	@Column(nullable = false)
 	private String marca;
-	@NotBlank
+	@Column(nullable = false)
 	private String modelo;
-	@NotBlank
+	@Column(nullable = false)
 	private Integer ano;
-	@NotBlank
+	@Column(nullable = false)
 	private Float valor;
 	
 	@ManyToOne
@@ -30,6 +30,21 @@ public class Veiculo {
 	private User usuario;
 	
 	
+	public Veiculo() {
+		super();
+	}
+	
+	public Veiculo(Long id, String marca, String modelo, Integer ano, Float valor, User usuario) {
+		super();
+		this.id = id;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.ano = ano;
+		this.valor = valor;
+		this.usuario = usuario;
+	}
+
+
 	public User getUsuario() {
 		return usuario;
 	}
