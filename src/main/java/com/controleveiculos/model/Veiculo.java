@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Veiculo {
@@ -21,12 +23,12 @@ public class Veiculo {
 	@Column(nullable = false)
 	private String modelo;
 	@Column(nullable = false)
-	private Integer ano;
+	private String ano;
 	@Column(nullable = false)
 	private Float valor;
 	
 	@ManyToOne
-	@JoinColumn(name = "client_id")
+	@JoinColumn(nullable = false )
 	private User usuario;
 	
 	
@@ -34,7 +36,7 @@ public class Veiculo {
 		super();
 	}
 	
-	public Veiculo(Long id, String marca, String modelo, Integer ano, Float valor, User usuario) {
+	public Veiculo(Long id, String marca, String modelo, String ano, Float valor, User usuario) {
 		super();
 		this.id = id;
 		this.marca = marca;
@@ -60,7 +62,7 @@ public class Veiculo {
 	public String getModelo() {
 		return modelo;
 	}
-	public Integer getAno() {
+	public String getAno() {
 		return ano;
 	}
 	public Float getValor() {
